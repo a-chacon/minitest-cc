@@ -42,7 +42,7 @@ module Minitest
       # @see https://runebook.dev/en/docs/ruby/coverage Coverage blog post explaining the use
       # @see https://ruby-doc.org/stdlib-2.7.6/libdoc/coverage/rdoc/Coverage.html Documentation of the module
       def start_coverage
-        Coverage.start(Hash[coverage_mode.collect { |m| [m, true] }])
+        Coverage.start(coverage_mode.collect { |m| [m, true] }.to_h)
       end
 
       ##
@@ -53,6 +53,7 @@ module Minitest
         puts "\n\n# Coverage:\n\n"
         @files.each { |f| puts f.to_s } if cc_mode == :per_file
         puts resume if cc_mode == :resume
+        puts
       end
 
       ##

@@ -9,7 +9,7 @@ Minitest::Cc is a plugin for [Minitest](https://github.com/minitest/minitest) th
 ## Installation
 
 Add it into your Gemfile:
-```
+```ruby
 # Gemfile
 gem 'minitest-cc'
 ```
@@ -18,7 +18,7 @@ If you are in Rails that is all.
 
 If you are in another app you need to require it in your test helper file:
 
-```
+```ruby
 require 'minitest/cc'
 ```
 

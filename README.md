@@ -2,9 +2,8 @@
 
 Minitest::Cc is a plugin for [Minitest](https://github.com/minitest/minitest) that provide a very simple and minimalism measure of code coverage by your tests.
 
-**You need to keep in mind that this is only a reference**.
+**You need to keep in mind that this information is only a reference and don't represent how effective are your tests**.
 
-**This is only an experimental version for now**
 
 ## Installation
 
@@ -37,7 +36,7 @@ Run options: --seed 6319
 # Coverage:
 
 
-lines: 95% branches: 75% methods: 93%
+lines: 95%    branches: 75%     methods: 93%
 
 
 Finished in 1.875197s, 12.7987 runs/s, 18.6647 assertions/s.

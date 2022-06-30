@@ -80,8 +80,41 @@ module Minitest
       # compose the string with resume of averages
       # @return [String] String with averages
       def resume
-        "lines: #{@files.lines_average}% branches: #{@files.branches_average}% methods: #{@files.methods_average}%"
+        str = ''
+        str += "lines: #{@files.lines_average.to_s_color}%\t" if coverage_mode.include? :lines
+        str += "branches: #{@files.branches_average.to_s_color}%\t" if coverage_mode.include? :branches
+        str += "methods: #{@files.methods_average.to_s_color}%\t" if coverage_mode.include? :methods
+        str
       end
+    end
+  end
+end
+
+class String # :nodoc:
+  def red
+    "\e[31m#{self}\e[0m"
+  end
+
+  def green
+    "\e[32m#{self}\e[0m"
+  end
+
+  def yellow
+    "\e[33m#{self}\e[0m"
+  end
+end
+
+class Integer # :nodoc:
+  def to_s_color
+    case self
+    when 1..33
+      to_s.red
+    when 34..66
+      to_s.yellow
+    when 67..100
+      to_s.green
+    else
+      to_s
     end
   end
 end

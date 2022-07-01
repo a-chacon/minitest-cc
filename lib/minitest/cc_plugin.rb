@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require 'coverage'
-require 'minitest'
 require 'minitest/cc'
 
 # Minitest module

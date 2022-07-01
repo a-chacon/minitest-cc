@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require 'minitest'
+
 require_relative 'cc/version'
 require_relative 'cc/reporter'
 require_relative 'cc/file_coverage'
@@ -42,6 +44,7 @@ module Minitest
       # @see https://runebook.dev/en/docs/ruby/coverage Coverage blog post explaining the use
       # @see https://ruby-doc.org/stdlib-2.7.6/libdoc/coverage/rdoc/Coverage.html Documentation of the module
       def start_coverage
+        require 'coverage'
         Coverage.start(coverage_mode.collect { |m| [m, true] }.to_h)
       end
 
@@ -54,6 +57,8 @@ module Minitest
         @files.each { |f| puts f.to_s } if cc_mode == :per_file
         puts resume if cc_mode == :resume
         puts
+      rescue NameError
+        puts "\n\n[!] cc extension is installed but was not started."
       end
 
       ##

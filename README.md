@@ -13,12 +13,12 @@ Add it into your Gemfile:
 gem 'minitest-cc'
 ```
 
-If you are in Rails that is all.
-
-If you are in another app you need to require it in your test helper file:
+Then you need to require it in the **very top** of your test helper file:
 
 ```ruby
 require 'minitest/cc'
+Minitest::Cc.start_coverage
+
 ```
 
 ## Usage
@@ -55,7 +55,7 @@ Minitest::Cc.cc_mode = :resume
   - It could be `:per_file` to get a list of files and his coverage
 
 
-* Coverage mode:
+* Coverage mode (This should be before starting the coverage):
 ```ruby
 Minitest::Cc.coverage_mode = [:lines, :branches, :methods]
 ```

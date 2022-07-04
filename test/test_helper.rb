@@ -1,7 +1,9 @@
 # frozen_string_literal: true
+require 'minitest/cc'
+# Minitest::Cc.start
 
 $LOAD_PATH.unshift File.expand_path('../lib', __dir__)
-require 'minitest/cc'
+
 
 require 'minitest/autorun'
 

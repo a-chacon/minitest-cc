@@ -12,7 +12,7 @@ Gem::Specification.new do |spec|
   spec.description = 'Plugin for minitest, provide a minimal information of code coverage to your test output. '
   spec.homepage = 'https://github.com/a-chacon/minitest-cc'
   spec.license = 'GPL-3.0'
-  spec.required_ruby_version = '>= 2.5.3'
+  spec.required_ruby_version = '>= 2.5.0'
 
   spec.metadata['rubygems_mfa_required'] = 'true'
 

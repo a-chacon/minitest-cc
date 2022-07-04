@@ -54,7 +54,7 @@ module Minitest
       # @see https://ruby-doc.org/stdlib-2.7.6/libdoc/coverage/rdoc/Coverage.html Documentation of the module
       #
       def start(*args)
-        @coverage_mode = args.collect(&:to_sym).select { |a| MODES.includes? a } unless args.empty?
+        @coverage_mode = args.collect(&:to_sym).select { |a| MODES.include? a } unless args.empty?
         Coverage.start(@coverage_mode.collect { |m| [m, true] }.to_h)
       end
 
@@ -63,8 +63,12 @@ module Minitest
       #
       def summary
         puts "\n\n# Coverage:\n\n"
-        @files.each { |f| puts f.to_s } if cc_mode == :per_file
-        puts resume if cc_mode == :resume
+        case cc_mode
+        when :per_file
+          @files.each { |f| puts f.to_s }
+        else
+          puts resume
+        end
       end
 
       ##

@@ -17,7 +17,7 @@ Then you need to require it in the **very top** of your test helper file:
 
 ```ruby
 require 'minitest/cc'
-Minitest::Cc.start_coverage
+Minitest::Cc.start
 
 ```
 
@@ -45,7 +45,14 @@ Finished in 1.875197s, 12.7987 runs/s, 18.6647 assertions/s.
 
 ### Configuration
 
-You can configure three aspects:
+#### Coverage mode:
+```ruby
+Minitest::Cc.start(:lines, :branches, :methods) # this is like look by default
+```
+  - You can choose whatever you want. I think are very explicit so don't need explanation.
+
+
+You can configure two aspects more:
 
 * Mode of cc the report:
 ```ruby
@@ -54,12 +61,6 @@ Minitest::Cc.cc_mode = :resume
   - It could be `:resume`, the default behavior
   - It could be `:per_file` to get a list of files and his coverage
 
-
-* Coverage mode (This should be before starting the coverage):
-```ruby
-Minitest::Cc.coverage_mode = [:lines, :branches, :methods]
-```
-  - You can choose an array with these three values. I think are very explicit so don't need explanation.
 
 * Files tracked:
 ```ruby

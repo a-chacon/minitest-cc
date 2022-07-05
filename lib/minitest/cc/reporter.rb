@@ -7,7 +7,10 @@ module Minitest
       ##
       # Executed in the final of the minitest run
       def report
+        Cc.peek_result
         Cc.summary
+      rescue StandardError => e
+        puts "\n\n[!] cc extension has problem for generate the report: #{e}"
       end
     end
   end

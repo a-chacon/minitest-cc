@@ -114,7 +114,7 @@ module Minitest
       # @return [String] contains the information ready to print
       #
       def to_s
-        return "#{relative_path} : Not executed during the tests." unless tested
+        return "#{relative_path} : Not executed or tracked by cov." unless tested
 
         "#{relative_path}:\n" + to_s_lines + to_s_branches + to_s_methods
       end
@@ -126,7 +126,7 @@ module Minitest
       def to_s_lines
         return '' unless lines
 
-        "\tlines: #{lines_executed}/#{lines} #{lines_percent.to_s_color}%"
+        " - l: #{lines_executed}/#{lines} #{lines_percent.to_s_color}%"
       end
 
       ##
@@ -136,7 +136,7 @@ module Minitest
       def to_s_branches
         return '' unless branches
 
-        "\tbranches: #{branches_executed}/#{branches} #{branches_percent.to_s_color}%"
+        " - b: #{branches_executed}/#{branches} #{branches_percent.to_s_color}%"
       end
 
       ##
@@ -146,7 +146,7 @@ module Minitest
       def to_s_methods
         return '' unless methods
 
-        "\tmethods: #{methods_executed}/#{methods} #{methods_percent.to_s_color}%"
+        " - m: #{methods_executed}/#{methods} #{methods_percent.to_s_color}%"
       end
 
       ##

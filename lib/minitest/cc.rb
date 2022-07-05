@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+require 'coverage'
 require 'minitest'
 
 require_relative 'cc/version'
@@ -11,6 +12,8 @@ module Minitest
   # Main module of the plugin
   # @author Andres
   module Cc
+    MODES = %i[lines branches methods].freeze
+
     @results = []
     @files = FileArray.new
 
@@ -32,38 +35,46 @@ module Minitest
     # @return [Array] mode of the coverage, this array could contain:
     #   :lines, :branches, :methods
     cattr_accessor :coverage_mode
-    self.coverage_mode = %i[
-      lines
-      branches
-      methods
-    ]
+    self.coverage_mode = MODES
 
     class << self
       ##
       # Start the coverage process
       # @see https://runebook.dev/en/docs/ruby/coverage Coverage blog post explaining the use
       # @see https://ruby-doc.org/stdlib-2.7.6/libdoc/coverage/rdoc/Coverage.html Documentation of the module
+      # @deprecated Use {#self.start(*args)} instead.
       def start_coverage
-        require 'coverage'
-        Coverage.start(coverage_mode.collect { |m| [m, true] }.to_h)
+        Coverage.start(@coverage_mode.collect { |m| [m, true] }.to_h)
       end
 
       ##
-      # Print the results after the runs
+      # start coverage process
+      # this method recive the arguments direct and not depend on set coverage mode before start
+      # @see https://runebook.dev/en/docs/ruby/coverage Coverage blog post explaining the use
+      # @see https://ruby-doc.org/stdlib-2.7.6/libdoc/coverage/rdoc/Coverage.html Documentation of the module
+      #
+      def start(*args)
+        @coverage_mode = args.collect(&:to_sym).select { |a| MODES.include? a } unless args.empty?
+        Coverage.start(@coverage_mode.collect { |m| [m, true] }.to_h)
+      end
+
+      ##
+      # Print results after the runs
+      #
       def summary
-        @results = Coverage.peek_result
-        list_files
         puts "\n\n# Coverage:\n\n"
-        @files.each { |f| puts f.to_s } if cc_mode == :per_file
-        puts resume if cc_mode == :resume
-        puts
-      rescue NameError
-        puts "\n\n[!] cc extension is installed but was not started."
+        case cc_mode
+        when :per_file
+          @files.each { |f| puts f.to_s }
+        else
+          puts resume
+        end
       end
 
       ##
       # This method populate the FileArray variable with results
-      def list_files
+      def peek_result
+        @results = Coverage.result
         Dir.glob(tracked_files.each { |f| File.expand_path(f) }).each do |d|
           full_path = File.expand_path(d)
           @files << FileCoverage.new(full_path, d, result_for_file(full_path))
@@ -82,7 +93,7 @@ module Minitest
       end
 
       ##
-      # compose the string with resume of averages
+      # compose the string with resume of cc
       # @return [String] String with averages
       def resume
         str = ''

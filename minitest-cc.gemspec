@@ -9,10 +9,10 @@ Gem::Specification.new do |spec|
   spec.email = ['andres.ch@protonmail.com']
 
   spec.summary = 'Minitest plugin, add code coverage metrics.'
-  spec.description = 'Plugin for minitest, provide a minimal information of code coverage to your test output. '
+  spec.description = 'Plugin for minitest. It provides minimal information about code coverage. '
   spec.homepage = 'https://github.com/a-chacon/minitest-cc'
   spec.license = 'GPL-3.0'
-  spec.required_ruby_version = '>= 2.5.3'
+  spec.required_ruby_version = '>= 2.5.0'
 
   spec.metadata['rubygems_mfa_required'] = 'true'
 

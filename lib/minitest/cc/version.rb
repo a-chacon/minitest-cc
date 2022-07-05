@@ -3,6 +3,6 @@
 module Minitest
   module Cc
     # plugin version
-    VERSION = '0.1.2'
+    VERSION = '0.2.0'
   end
 end

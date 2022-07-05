@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    minitest-cc (0.1.2)
+    minitest-cc (0.2.0)
 
 GEM
   remote: https://rubygems.org/

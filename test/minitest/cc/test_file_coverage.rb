@@ -25,7 +25,7 @@ module Minitest
       def test_to_s
         assert_includes @file_coverage.to_s, @file_coverage.relative_path
         @file_coverage.tested = false
-        assert_equal "#{@file_coverage.relative_path} : Not executed during the tests.", @file_coverage.to_s
+        assert_includes @file_coverage.to_s, @file_coverage.relative_path
         @file_coverage.tested = true
       end
 

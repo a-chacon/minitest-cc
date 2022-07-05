@@ -8,17 +8,18 @@ module Minitest
       refute_nil ::Minitest::Cc::VERSION
     end
 
-    def test_default_values
-      # assert_equal :resume, Minitest::Cc.cc_mode
-      assert_equal [
-        './app/**/*.rb',
-        './lib/**/*.rb'
-      ], Minitest::Cc.tracked_files
-      assert_equal [:lines, :branches, :methods], Minitest::Cc.coverage_mode
+    def test_start_coverage
+      assert_nil Cc.start
     end
 
-    def test_start_coverage
-      assert_nil Cc.start_coverage
+    def test_peek_result
+      Cc.start
+      assert Cc.peek_result
+      assert_equal String, Cc.resume.class
+    end
+
+    def test_result_for_file_whitout_results
+      assert_nil Cc.result_for_file('/test.rb')
     end
   end
 end

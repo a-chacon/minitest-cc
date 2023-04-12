@@ -154,9 +154,9 @@ module Minitest
       # @return [Integer] percent of coverage. executed lines / total lines
       #
       def lines_percent
-        lines_executed * 100 / lines
-      rescue ZeroDivisionError
-        0
+        return 0.0 if lines.zero?
+
+        lines_executed * 100.0 / lines
       end
 
       ##
@@ -164,9 +164,9 @@ module Minitest
       # @return [Integer] percent of coverage. executed branches / total branches
       #
       def branches_percent
-        branches_executed * 100 / branches
-      rescue ZeroDivisionError
-        0
+        return 0.0 if branches.zero?
+
+        branches_executed * 100.0 / branches
       end
 
       ##
@@ -174,9 +174,9 @@ module Minitest
       # @return [Integer] percent of coverage. executed methods / total methods
       #
       def methods_percent
-        methods_executed * 100 / methods
-      rescue ZeroDivisionError
-        0
+        return 0.0 if methods.zero?
+
+        methods_executed * 100.0 / methods
       end
     end
   end

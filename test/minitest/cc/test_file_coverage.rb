@@ -30,7 +30,7 @@ module Minitest
       end
 
       def test_lines_percent
-        assert_equal 65, @file_coverage.lines_percent
+        assert_equal 65.38461538461539, @file_coverage.lines_percent
       end
 
       def test_branches_percent
@@ -38,7 +38,7 @@ module Minitest
       end
 
       def test_methods_percent
-        assert_equal 77, @file_coverage.methods_percent
+        assert_equal 77.77777777777777, @file_coverage.methods_percent
       end
     end
   end

@@ -69,6 +69,7 @@ module Minitest
         else
           puts resume
         end
+        puts "\nAverage: #{@files.total_coverage_percent.round(2).to_s_color}%"
       end
 
       ##
@@ -97,9 +98,9 @@ module Minitest
       # @return [String] String with averages
       def resume
         str = ''
-        str += "lines: #{@files.lines_average.to_s_color}%\t" if coverage_mode.include? :lines
-        str += "branches: #{@files.branches_average.to_s_color}%\t" if coverage_mode.include? :branches
-        str += "methods: #{@files.methods_average.to_s_color}%\t" if coverage_mode.include? :methods
+        str += "Lines: #{@files.lines_average.round(2).to_s_color}%\t" if coverage_mode.include? :lines
+        str += "Branches: #{@files.branches_average.round(2).to_s_color}%\t" if coverage_mode.include? :branches
+        str += "Methods: #{@files.methods_average.round(2).to_s_color}%\t" if coverage_mode.include? :methods
         str
       end
     end
@@ -120,14 +121,14 @@ class String # :nodoc:
   end
 end
 
-class Integer # :nodoc:
+class Float # :nodoc:
   def to_s_color
     case self
-    when 1..33
+    when 1.0..33.0
       to_s.red
-    when 34..66
+    when 33.1..66.0
       to_s.yellow
-    when 67..100
+    when 66.1..100.0
       to_s.green
     else
       to_s

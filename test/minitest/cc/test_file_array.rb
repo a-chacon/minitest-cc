@@ -20,7 +20,7 @@ module Minitest
       end
 
       def test_lines_average
-        assert_equal 65, @array.lines_average
+        assert_equal 65.38461538461539, @array.lines_average
       end
 
       def test_branches_average
@@ -28,7 +28,7 @@ module Minitest
       end
 
       def test_methods_average
-        assert_equal 77, @array.methods_average
+        assert_equal 77.77777777777777, @array.methods_average
       end
     end
   end
